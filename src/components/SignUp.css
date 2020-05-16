@@ -1,0 +1,33 @@
+.signup {
+  background-image: url("SignUpBG.jpg");
+  min-width: 100%;
+  opacity: 1;
+  min-height: 100%;
+  /* background-position: bottom; */
+  background-size: cover;
+  position: fixed;
+}
+.boxS {
+  /* position: absolute; */
+  top: 15%;
+  margin-top: 10px;
+  width: 400px;
+  height: 570px;
+  padding: 30px;
+  background: rgba(64, 96, 146, 0.3);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.boxS input[type="submit"] {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #03f437;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 700;
+}
