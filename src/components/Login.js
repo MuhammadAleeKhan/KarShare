@@ -3,7 +3,6 @@ import Header from "./Header";
 import { Redirect, withRouter } from "react-router-dom";
 import "./Login.css";
 
-
 class Login extends React.Component {
   constructor() {
     super();
@@ -63,7 +62,7 @@ class Login extends React.Component {
       return <Redirect to="/" />;
     }
     return (
-      <div className = "login">
+      <div className="login" style = {{backgroundPositionY: "20px"}}>
         <div>
           <Header />
         </div>
@@ -72,7 +71,7 @@ class Login extends React.Component {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <div className="boxL">
-          <h2>Login</h2>
+          <h2 style = {{textShadow: "black 0px 5px 10px"}}>Welcome to KarShare</h2>
           <form onSubmit={this.submithandler}>
             <div className="inputBoxL">
               <input
@@ -96,10 +95,7 @@ class Login extends React.Component {
               />
               <label>Password</label>
             </div>
-            <button type="submit">
-              {" "}
-              Login
-            </button>
+            <button type="submit" class="buttonLogin"> Login</button>
           </form>
         </div>
         {this.state.email}

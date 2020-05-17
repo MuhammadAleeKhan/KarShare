@@ -1,6 +1,9 @@
 import React from "react";
 import { GoogleComponent } from "react-google-location";
 import Header1 from "./Header1";
+import "./BookRides.css";
+import MyFancyComponent from "./direction.js";
+// import "./map.css";
 class Bookride extends React.Component {
   constructor() {
     super();
@@ -25,7 +28,7 @@ class Bookride extends React.Component {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        'authorization': localStorage.getItem("tok")
+        authorization: localStorage.getItem("tok"),
       },
       body: JSON.stringify({
         End_adrress: this.state.Place,
@@ -36,9 +39,20 @@ class Bookride extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="BookRides">
         <Header1 />
+        <MyFancyComponent
+          lat1={this.state.lati}
+          lng1={this.state.lngi}
+        />
         <GoogleComponent
+          style={{
+            height: "30px",
+            width: "30%",
+            boxSizing: "border-box",
+            borderRadius: "10px",
+            marginLeft: "-100px",
+          }}
           apiKey={"AIzaSyB8BvbZp0i7LZw4mbhDiRKdbjYH_BZfM_c"}
           language={"en"}
           country={"country:pk"}
@@ -46,18 +60,33 @@ class Bookride extends React.Component {
           onChange={this.handlechange}
         />
         <br></br>
-        <button onClick={this.submithandler}>Find rides</button>
+        <button
+          class="buttonp"
+          onClick={this.submithandler}
+          style={{ marginLeft: "10px" }}
+        >
+          Find rides
+        </button>
         <br></br>
-        {this.state.rides.map((arr) => (
-          <li key={arr.rideid}>
-            Starting address: {arr.Starting_address}
-            <br></br>
-            Drop off: {arr.End_adrress}
-            <br></br>
-            Rider name:{arr.fullname}
-            <br></br>
-          </li>
-        ))}
+        <div className="RideDetails">
+          {this.state.rides.map((arr) => (
+            <li key={arr.rideid}>
+              Starting address: {arr.Starting_address}
+              <br></br>
+              Drop off: {arr.End_adrress}
+              <br></br>
+              Rider name:{arr.fullname} &ensp;
+              <br></br>
+              <div>
+                <button class="buttonbook" onClick={this.submithandler}>
+                  Book
+                </button>
+              </div>
+              <br></br>
+              <br></br>
+            </li>
+          ))}
+        </div>
       </div>
     );
   }

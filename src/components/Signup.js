@@ -39,7 +39,7 @@ class Signup extends React.Component {
     if (window.sessionStorage !== "undefined") {
       this.setState({ status: "failed" });
     }
-    this.props.history.push('/');
+    this.props.history.push("/");
   }
   handlechange(event) {
     const { name, value, checked, type } = event.target;
@@ -68,48 +68,52 @@ class Signup extends React.Component {
         <div>
           <Header />
         </div>
-        <title align="center">KarShare SignUp</title>
 
         <form autoComplete="off" onSubmit={this.submithandler}>
           <div className="boxS">
-            {/* <legend style="color: white;">SignUp Form</legend> */}
-            <h3 style={{ fontFamily: "Book Antiqua", color: "white" }}>
+            <h3
+              style={{
+                fontFamily: "Book Antiqua",
+                color: "white",
+                textShadow: "black 0px 0px 10px",
+              }}
+            >
               Personal Information
             </h3>
             <label
               htmlFor="fullname"
               style={{
                 fontFamily: "Book Antiqua",
-                color: "black",
-                background: "rgba(255, 255, 255, 0.4)",
-                borderRadius: "2px",
+                color: "white",
+                textShadow: "black 0px 0px 10px",
               }}
             >
               Full Name
             </label>
-            <br />
+            &ensp;
+            {/* <br /> */}
             <input
               type="text"
               value={this.state.fullname}
               name="fullname"
-              placeholder="fullname"
+              placeholder="Enter your Full Name"
+              size="24"
               onChange={this.handlechange}
               required
             />
             <br />
             <br />
-
             <label
               htmlFor="Gender"
               style={{
                 fontFamily: "Book Antiqua",
-                color: "black",
-                background: "rgba(255, 255, 255, 0.4)",
-                borderRadius: "2px",
+                color: "white",
+                textShadow: "black 0px 0px 10px",
               }}
             >
               Male
             </label>
+            &ensp;
             <input
               type="radio"
               value="M"
@@ -122,13 +126,13 @@ class Signup extends React.Component {
               htmlFor="Gender"
               style={{
                 fontFamily: "Book Antiqua",
-                color: "black",
-                background: "rgba(255, 255, 255, 0.4)",
-                borderRadius: "2px",
+                color: "white",
+                textShadow: "black 0px 0px 10px",
               }}
             >
               Female
             </label>
+            &ensp;
             <input
               type="radio"
               value="F"
@@ -141,13 +145,13 @@ class Signup extends React.Component {
               htmlFor="Gender"
               style={{
                 fontFamily: "Book Antiqua",
-                color: "black",
-                background: "rgba(255, 255, 255, 0.4)",
-                borderRadius: "2px",
+                color: "white",
+                textShadow: "black 0px 0px 10px",
               }}
             >
               Other
             </label>
+            &ensp;
             <input
               type="radio"
               value="O"
@@ -161,13 +165,13 @@ class Signup extends React.Component {
               htmlFor="dateofbirth"
               style={{
                 fontFamily: "Book Antiqua",
-                color: "black",
-                background: "rgba(255, 255, 255, 0.4)",
-                borderRadius: "2px",
+                color: "white",
+                textShadow: "black 0px 0px 10px",
               }}
             >
               Date of Birth
             </label>
+            &ensp;
             <input
               type="date"
               value={this.state.dateofbirth}
@@ -182,20 +186,19 @@ class Signup extends React.Component {
               htmlFor="email"
               style={{
                 fontFamily: "Book Antiqua",
-                color: "black",
-                background: "rgba(255, 255, 255, 0.4)",
-                borderRadius: "2px",
+                color: "white",
+                textShadow: "black 0px 0px 10px",
               }}
             >
               Email address
             </label>
-            <br />
-
+            &ensp;
             <input
               type="email"
               value={this.state.email}
               name="email"
-              placeholder="email"
+              placeholder="Enter your Email Address"
+              size="24"
               onChange={this.handlechange}
               required
             />
@@ -205,19 +208,19 @@ class Signup extends React.Component {
               htmlFor="contactno"
               style={{
                 fontFamily: "Book Antiqua",
-                color: "black",
-                background: "rgba(255, 255, 255, 0.4)",
-                borderRadius: "2px",
+                color: "white",
+                textShadow: "black 0px 0px 10px",
               }}
             >
               Contact Number*
             </label>
-            <br />
+            &ensp;
             <input
               type="numeric"
               value={this.state.contactno}
               name="contactno"
-              placeholder="contactno"
+              placeholder="Enter your Contact Number"
+              size="24"
               onChange={this.handlechange}
             />
             <br />
@@ -226,39 +229,40 @@ class Signup extends React.Component {
               htmlFor="password"
               style={{
                 fontFamily: "Book Antiqua",
-                color: "black",
-                background: "rgba(255, 255, 255, 0.4)",
-                borderRadius: "2px",
+                color: "white",
+                textShadow: "black 0px 0px 10px",
               }}
             >
               Password
             </label>
-            <br />
+            &ensp;
             <input
               type="password"
               value={this.state.password}
               name="password"
-              placeholder="password"
+              placeholder="Enter your Password"
+              size="24"
               onChange={this.handlechange}
               required
             />
             <br />
             <br />
-            <input
+            {/* <input
               type="submit"
-              name
-              defaultValue="Submit"
+              name="Submit"
+              defaultValue=""
               onSubmit={this.submithandler}
-            />
+            /> */}
+            <button type="submit" class="buttonSignUp">Sign Up</button>
           </div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
         </form>
-        {window.sessionStorage.getItem("tok")}
+        {this.state.fullname}
+        {this.state.Gender}
         {this.state.dateofbirth}
+        {this.state.email}
+        {this.state.contactno}
+        {this.state.password}
+        {window.sessionStorage.getItem("tok")}
       </div>
     );
   }

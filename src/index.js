@@ -1,17 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
-import App1 from "./components/App1";
-import * as serviceWorker from './serviceWorker';
-
+// import Signup from "./components/Signup";
+// import Login from "./components/Login";
+// import App1 from "./components/App1";
+import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    < App />
+    <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

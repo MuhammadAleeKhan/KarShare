@@ -1,16 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function LoginBtn() {
   return (
-    
-    <button type="button" class="button">
-      <a href="Login.js">
+    <button type="button" class="buttonL">
+      <Link to="/login">
         <span> Login </span>
-      </a>
+      </Link>
     </button>
-    
   );
 }
 
 export default LoginBtn;
-

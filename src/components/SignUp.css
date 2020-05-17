@@ -6,13 +6,16 @@
   /* background-position: bottom; */
   background-size: cover;
   position: fixed;
+  background-position-y: 20px;
 }
+
+
 .boxS {
   /* position: absolute; */
-  top: 15%;
-  margin-top: 10px;
+  /* top: 15%; */
+  margin-top: 35px;
   width: 400px;
-  height: 570px;
+  height: 510px;
   padding: 30px;
   background: rgba(64, 96, 146, 0.3);
   box-sizing: border-box;
@@ -20,14 +23,21 @@
   border-radius: 10px;
 }
 
-.boxS input[type="submit"] {
+.buttonSignUp {
   background: transparent;
   border: none;
   outline: none;
-  color: #fff;
-  background: #03f437;
-  padding: 10px 20px;
+  color: white;
+  background: rgb(255, 238, 0);
+  padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
   font-weight: 700;
+  text-shadow: black; 
 }
+
+.buttonSignUp:hover {
+  background-color: rgba(0, 0, 0, 0.527);
+  color: white;
+}
+

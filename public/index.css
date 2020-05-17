@@ -1,6 +1,6 @@
 * {
   margin: 0px;
-  font-family: Book Antiqua;
+  /* font-family: Book Antiqua; */
 }
 
 header {
@@ -32,7 +32,7 @@ header > h1 a {
   text-shadow: rgb(144, 8, 8) 6px 8px 15px;
 }
 
-.button {
+.buttonL {
   display: flex;
   align-items: center;
   background-color: rgb(255, 238, 0);
@@ -47,9 +47,10 @@ header > h1 a {
   box-shadow: 0 7px 5px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.19);
   transition: all 0.2s;
   cursor: pointer;
+  white-space: nowrap;
 }
 
-.button a {
+.buttonL a {
   text-decoration: none;
   color: white;
 }
@@ -57,7 +58,7 @@ header > h1 a {
 /*For Desktop*/
 
 @media screen and (min-width: 400px) {
-  .button {
+  .buttonL {
     margin: 5px;
     margin-left: 800px;
     padding-right: 10px;
@@ -67,27 +68,27 @@ header > h1 a {
   }
 }
 
-.button:hover {
+.buttonL:hover {
   background-color: rgba(0, 0, 0, 0.527);
   color: white;
 }
 /*Desktop Version*/
 
 @media screen and (min-width: 400px) {
-  .button:hover span {
+  .buttonL:hover span {
     padding-right: 16px;
-    top: 1px;
+    top: -1px;
   }
 }
 
-.button span {
+.buttonL span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.button span:after {
+.buttonL span:after {
   position: absolute;
   opacity: 0;
   transition: 0.5s;
@@ -95,12 +96,12 @@ header > h1 a {
 /* Desktop Version */
 
 @media screen and (min-width: 400px) {
-  .button span:after {
+  .buttonL span:after {
     content: "\00bb";
   }
 }
 
-.button:hover span:after {
+.buttonL:hover span:after {
   opacity: 1;
   right: 0;
 }
@@ -160,7 +161,7 @@ header > h1 a {
 @media screen and (min-width: 400px) {
   .button1 span:after {
     content: "\00bb";
-    top: 1px;
+    top: -1px;
   }
 }
 /* Desktop Version*/
