@@ -13,7 +13,7 @@ function SecondBlock() {
         </div>
         <div class="face face2">
           <div class="content">
-            <p>I AM SO FUCKING ANGRY</p>
+            <p>ABOUT SECTION</p>
             {/* <a href="#">Read More</a> */}
           </div>
         </div>
@@ -29,7 +29,7 @@ function SecondBlock() {
         </div>
         <div class="face face2">
           <div class="content">
-            <p>I AM SO FUCKING ANGRY</p>
+            <p>CONTACT US SECTION</p>
             {/* <a href="#">Read More</a> */}
           </div>
         </div>
@@ -45,7 +45,7 @@ function SecondBlock() {
         </div>
         <div class="face face2">
           <div class="content">
-            <p>I AM SO FUCKING ANGRY</p>
+            <p>CAREER SECTION</p>
             {/* <a href="#">Read More</a> */}
           </div>
         </div>
