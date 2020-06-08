@@ -10,6 +10,8 @@ import App1 from "./App1";
 import Admin from "./Admin";
 //import {Link}  from 'react-router-dom'
 import Bookride from "./Bookride";
+import Addimage from "./Addimage";
+import Updateprof from "./Updateprof";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
@@ -23,6 +25,8 @@ function App() {
           <Route path="/admin" component={Admin} />
           <Route path="/addride" component={App1} />
           <Route path="/Bookrides" component={Bookride} />
+          <Route path="/picture" component={Addimage} />
+          <Route path="/update" component={Updateprof} />
         </Switch>
       </div>
     </Router>

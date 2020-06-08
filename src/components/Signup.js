@@ -256,12 +256,12 @@ class Signup extends React.Component {
             <button type="submit" class="buttonSignUp">Sign Up</button>
           </div>
         </form>
-        {this.state.fullname}
+        {/* {this.state.fullname}
         {this.state.Gender}
         {this.state.dateofbirth}
         {this.state.email}
         {this.state.contactno}
-        {this.state.password}
+        {this.state.password} */}
         {window.sessionStorage.getItem("tok")}
       </div>
     );
