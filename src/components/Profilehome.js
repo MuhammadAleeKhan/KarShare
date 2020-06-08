@@ -1,6 +1,7 @@
 import React from "react";
 import Header1 from "./Header1";
 import jwt_decode from "jwt-decode";
+import { Link } from "react-router-dom";
 import "./Profile.css";
 
 class Profilehome extends React.Component {
@@ -13,19 +14,29 @@ class Profilehome extends React.Component {
       contactno: "",
       dateofbirth: "",
       status: "",
+      pf_url: "",
     };
   }
 
-  componentDidMount() {
-    const token = localStorage.getItem("tok");
-    const decoded = jwt_decode(token);
-    this.setState({
-      fullname: decoded.fullname,
-      email: decoded.email,
-      Gender: decoded.Gender,
-      contactno: decoded.contactno,
-      dateofbirth: decoded.dateofbirth,
-    });
+  async componentDidMount() {
+    await fetch("http://localhost:4000/userdetails", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("tok"),
+      },
+    })
+      .then(async (res) => await res.json())
+      .then((res) => {
+        this.setState({
+          fullname: res.name,
+          email: res.email,
+          Gender: res.Gender,
+          contactno: res.contact,
+          dateofbirth: res.date,
+          pf_url: res.pf_url,
+        });
+      });
   }
 
   render() {
@@ -34,36 +45,46 @@ class Profilehome extends React.Component {
         <Header1 />
         {/* This is the divs of the code, we will edit */}
         <div>
+          <Link to="/picture">
+            <button type="button" className="dp">
+              Upload Picture
+            </button>
+          </Link>
+          <Link to="/update">
+            <button type="button" className="pro">Update Profile</button>
+          </Link>
           <h1 className="ProfileHead"> PROFILE </h1>
         </div>
         <table className="Attributes">
           <tbody>
             <tr>
-              <td>Name:</td>
-              <td>{this.state.fullname}</td>
+              <td className="Image">
+                <img src={this.state.pf_url}></img>
+              </td>
+            </tr>
+            <tr>
+              <td>Name: {this.state.fullname}</td>
             </tr>
             <br />
             <tr>
-              <td>Gender:</td>
-              <td>{this.state.Gender}</td>
+              <td>Gender: {this.state.Gender}</td>
             </tr>
             <br />
             <tr>
-              <td>Email Address:</td>
-              <td>{this.state.email}</td>
+              <td>Email Address: {this.state.email}</td>
             </tr>
             <br />
             <tr>
-              <td>Date of Birth:</td>
-              <td>{this.state.dateofbirth}</td>
+              <td>Date of Birth: {this.state.dateofbirth}</td>
             </tr>
             <br />
             <tr>
-              <td>Contact Number:</td>
-              <td>{this.state.contactno}</td>
+              <td>Contact Number: {this.state.contactno}</td>
             </tr>
           </tbody>
         </table>
+
+        {/* {this.state.pf_url} */}
       </div>
     );
   }
