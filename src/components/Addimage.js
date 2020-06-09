@@ -17,17 +17,17 @@ class Addimage extends React.Component{
     
       
       }
-    onSubmit(){
+   async onSubmit(){
         const data = new FormData()
         console.log(this.state.files)
    data.append('file', this.state.files)
    console.log(data)
-   axios.put("http://localhost:4000/pics", data, {
+   await axios.put("http://localhost:4000/pics", data, {
        headers:{'authorization':localStorage.getItem('tok')} 
     // receive two    parameter endpoint url ,form data
 }).then(res => { // then print response status
     console.log(res.statusText)
- })
+ }).then(this.props.history.push())
  
 
 this.setState({status:'true'})
