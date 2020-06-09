@@ -84,7 +84,7 @@ class Profilehome extends React.Component {
           </tbody>
         </table>
 
-        {/* {this.state.pf_url} */}
+         {this.state.pf_url} 
       </div>
     );
   }

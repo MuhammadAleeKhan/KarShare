@@ -98,6 +98,7 @@ app.put('/pics',verifyToken,function(req, res) {
         var sql="UPDATE users set prof_pic=? WHERE userid=?;"; 
         mysqlconnec.query(sql,[new_path,authData.user.id],(err,row,fields)=>{
             if(!err){
+                console.log('success')
                 res.send('success')
             } else{
                 console.log(err);
@@ -112,16 +113,7 @@ app.put('/pics',verifyToken,function(req, res) {
       
 
   
-app.get("/currentrides/:id",(req,res)=>{
-mysqlconnec.query("SELECT * FROM rides where userid=? ",[req.params.id],(err,res,fields)=>{
-    if(!err){
-        res.send(res);
-    } else{
-        console.log(err);
-    }
-})
 
-})
 app.post("/verifytok",verifyToken,(req,res)=>{
     
     jwt.verify(req.token,'secretkey',(err,authData)=>{
@@ -249,21 +241,7 @@ app.post("/verifytok",verifyToken,(req,res)=>{
                                 console.log(err);
                             }
                         })}})})
-                        app.post("/bringrides",verifyToken,(req,res)=>{
-                            let emp=req.body;
-                            var sql="SELECT * FROM rides,users WHERE rides.End_adrress=? and rides.userid=users.userid;"; 
-                            jwt.verify(req.token,'secretkey',(err,authData)=>{
-                                if(err){
-                                    res.sendStatus(403);
-            
-                                } else{
-                                    mysqlconnec.query(sql,[emp.End_adrress],(err,row,fields)=>{
-                                        if(!err){
-                                            res.send(row);
-                                        } else{
-                                            console.log(err);
-                                        }
-                                    })}})})
+                       
               app.post("/addride",verifyToken,(req,res)=>{
                 let emp=req.body;
                 var sql="INSERT INTO rides(userid,userregistcarid,startlat,startlng,endlat,endlng,Starting_address,End_adrress) VALUES(?,?,?,?,?,?,?,?);"; 
@@ -281,14 +259,15 @@ app.post("/verifytok",verifyToken,(req,res)=>{
                         })}})})
                         app.post("/bringrides",verifyToken,(req,res)=>{
                             let emp=req.body;
-                            var sql="SELECT * FROM rides,users WHERE rides.End_adrress=? and rides.userid=users.userid;"; 
+                            var sql="SELECT * FROM rides,users WHERE rides.End_adrress=? and rides.userid=users.userid and rides.userid!=?;"
                             jwt.verify(req.token,'secretkey',(err,authData)=>{
                                 if(err){
                                     res.sendStatus(403);
             
                                 } else{
-                                    mysqlconnec.query(sql,[emp.End_adrress],(err,row,fields)=>{
+                                    mysqlconnec.query(sql,[emp.End_adrress,authData.user.id],(err,row,fields)=>{
                                         if(!err){
+                                            console.log(authData.user.id)
                                             res.send(row);
                                         } else{
                                             console.log(err);
@@ -323,7 +302,7 @@ app.post("/verifytok",verifyToken,(req,res)=>{
                                                 res.sendStatus(403);
                         
                                             } else{
-                                                mysqlconnec.query(sql,[emp.rideid,authData.user.id,emp.Starting_address,emp.End_adrress,,emp.fullname],(err,row,fields)=>{
+                                                mysqlconnec.query(sql,[emp.rideid,authData.user.id,emp.Starting_address,emp.End_adrress,'Pending',authData.user.name],(err,row,fields)=>{
                                                     if(!err){
                                                         console.log('success')
                                                         res.json({row:row,authData:authData});
@@ -332,7 +311,7 @@ app.post("/verifytok",verifyToken,(req,res)=>{
                                                     }
                                                 })}})})                     
                
-                                                app.get("/bringride",verifyToken,(req,res)=>{
+                                                app.get("/bringmyride",verifyToken,(req,res)=>{
                                                     let emp=req.body;
                                                     var sql="SELECT * FROM rides where userid=?;"; 
                                                     jwt.verify(req.token,'secretkey',(err,authData)=>{
@@ -350,8 +329,161 @@ app.post("/verifytok",verifyToken,(req,res)=>{
                                                                     console.log(err);
                                                                 }
                                                             })}})})   
+                                                            app.post("/bringbookingsonride",verifyToken,(req,res)=>{
+                                                                let emp=req.body;
+                                                                var sql="SELECT * FROM users where userid in (SELECT book_user_id from Bookings where rideid=?);"; 
+                                                                jwt.verify(req.token,'secretkey',(err,authData)=>{
+                                                                    if(err){
+                                                                        console.log('error')
+                                                                        res.sendStatus(403);
+                                                
+                                                                    } else{
+                                                                        mysqlconnec.query(sql,[emp.id],(err,row,fields)=>{
+                                                                            if(!err){
+                                                                                console.log('success')
+                                                                                res.send(row);
+                                                                            } else{
+                                                                                console.log('musqlerror')
+                                                                                console.log(err);
+                                                                            }
+                                                                        })}})})   
+app.get("/adminbringusers",verifyToken,(req,res)=>{
+                let emp=req.body;
+                var sql="SELECT * FROM users where usertypeid!=2;"; 
+                jwt.verify(req.token,'adminkey',(err,authData)=>{
+                    if(err){
+                        res.sendStatus(403);
+
+                    } else{
+                        mysqlconnec.query(sql,[],(err,row,fields)=>{
+                            if(!err){
+                                res.send(row);
+                            } else{
+                                console.log(err);
+                            }
+                        })}})})
+                        app.post("/adminbringusersspecific",verifyToken,(req,res)=>{
+                            console.log('sccess')
+                            let emp=req.body;
                         
-               
+                            var sql="SELECT * FROM users where fullname LIKE ?;"; 
+                            jwt.verify(req.token,'adminkey',(err,authData)=>{
+                                if(err){
+                                    console.log('error')
+                                    res.sendStatus(403);
+            
+                                } else{
+                                    mysqlconnec.query(sql,[emp.name],(err,row,fields)=>{
+                                        if(!err){
+                                            console.log('row')
+                                            res.send(row);
+                                        } else{
+                                            console.log(err);
+                                        }
+                                    })}})})
+                app.delete("/admindeleteuser",verifyToken,(req,res)=>{
+                            console.log('sccess')
+                            let emp=req.body;
+                        
+                            var sql="DELETE FROM users where userid=?;"; 
+                            jwt.verify(req.token,'adminkey',(err,authData)=>{
+                                if(err){
+                                    console.log('error')
+                                    res.sendStatus(403);
+            
+                                } else{
+                                    mysqlconnec.query(sql,[emp.id],(err,row,fields)=>{
+                                        if(!err){
+                                            console.log('row')
+                                            res.send(row);
+                                        } else{
+                                            console.log(err);
+                                        }
+                                    })}})})
+app.get("/adminbringrides",verifyToken,(req,res)=>{
+                let emp=req.body;
+                var sql="SELECT * FROM rides,users where rides.userid=users.userid;"; 
+                jwt.verify(req.token,'adminkey',(err,authData)=>{
+                    if(err){
+                        res.sendStatus(403);
+
+                    } else{
+                        mysqlconnec.query(sql,[],(err,row,fields)=>{
+                            if(!err){
+                                res.send(row);
+                            } else{
+                                console.log(err);
+                            }
+                        })}})})
+                        app.post("/adminbringridesspecific",verifyToken,(req,res)=>{
+                            let emp=req.body;
+                            var sql="SELECT * FROM rides,users where rides.userid=users.userid AND users.fullname Like ?;"; 
+                            jwt.verify(req.token,'adminkey',(err,authData)=>{
+                                if(err){
+                                    res.sendStatus(403);
+            
+                                } else{
+                                    mysqlconnec.query(sql,[emp.name],(err,row,fields)=>{
+                                        if(!err){
+                                            res.send(row);
+                                        } else{
+                                            console.log(err);
+                                        }
+                                    })}})})
+app.delete("/admindeleterides",verifyToken,(req,res)=>{
+                            console.log('sccess')
+                            let emp=req.body;
+                        
+                            var sql="DELETE FROM rides where rideid=?;"; 
+                            jwt.verify(req.token,'adminkey',(err,authData)=>{
+                                if(err){
+                                    console.log('error')
+                                    res.sendStatus(403);
+            
+                                } else{
+                                    mysqlconnec.query(sql,[emp.id],(err,row,fields)=>{
+                                        if(!err){
+                                            console.log('row')
+                                            res.send(row);
+                                        } else{
+                                            console.log(err);
+                                        }
+                                    })}})})              
+                                
+ app.get("/adminbringbookings",verifyToken,(req,res)=>{
+                let emp=req.body;
+                var sql="SELECT * FROM Bookings"; 
+                jwt.verify(req.token,'adminkey',(err,authData)=>{
+                    if(err){
+                        res.sendStatus(403);
+
+                    } else{
+                        mysqlconnec.query(sql,[],(err,row,fields)=>{
+                            if(!err){
+                                res.send(row);
+                            } else{
+                                console.log(err);
+                            }
+                        })}})})             
+app.post("/adminbringbookingsspecific",verifyToken,(req,res)=>{
+                            console.log('sccess')
+                            let emp=req.body;
+                        
+                            var sql="SELECT * FROM Bookings where rider_name LIKE ?;"; 
+                            jwt.verify(req.token,'adminkey',(err,authData)=>{
+                                if(err){
+                                    console.log('error')
+                                    res.sendStatus(403);
+            
+                                } else{
+                                    mysqlconnec.query(sql,[emp.name],(err,row,fields)=>{
+                                        if(!err){
+                                            console.log('row')
+                                            res.send(row);
+                                        } else{
+                                            console.log(err);
+                                        }
+                                    })}})})        
                function verifyToken(req,res,next){
                  const header=req.headers['authorization'];
                  if(typeof header!=='undefined'){
