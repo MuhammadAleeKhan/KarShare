@@ -134,7 +134,7 @@ class Admin_Bookings extends React.Component{
             <td>{arr.rideid}</td>
             <td>{arr.Starting_address}</td>
             <td>{arr.End_address}</td>
-            <td>{arr.rider_name}</td>
+            <td>{arr.fullname}</td>
             <td>{arr.statuss}</td>
             <td>
               <a href="#" className="edit" title="Edit" data-toggle="tooltip">

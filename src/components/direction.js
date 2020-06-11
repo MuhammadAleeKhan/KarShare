@@ -4,7 +4,8 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker
+  Marker,
+  DirectionsRenderer
 } from "react-google-maps";
 
 const MyMapComponent = compose(

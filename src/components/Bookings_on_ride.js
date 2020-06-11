@@ -32,6 +32,7 @@ class Bookings_on_ride extends React.Component{
               <br></br>
               Contact no:{arr.contactno}
               <div>
+            
               </div>
               <br></br>
               <br></br>

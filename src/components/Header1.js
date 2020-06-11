@@ -12,6 +12,7 @@ function Header1() {
            KarShare 
         </Link>
       </h1>
+      <Logout />
       <button type="button" class="buttonL">
         <Link to="/addride">
           <span> Add ride </span>
@@ -32,7 +33,7 @@ function Header1() {
           <span> View Your rides </span>
         </Link>
       </button1>
-      <Logout />
+      
     </header>
   );
 }
