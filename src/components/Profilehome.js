@@ -51,7 +51,9 @@ class Profilehome extends React.Component {
             </button>
           </Link>
           <Link to="/update">
-            <button type="button" className="pro">Update Profile</button>
+            <button type="button" className="pro">
+              Update Profile
+            </button>
           </Link>
           <h1 className="ProfileHead"> PROFILE </h1>
         </div>
@@ -84,7 +86,7 @@ class Profilehome extends React.Component {
           </tbody>
         </table>
 
-         {this.state.pf_url} 
+        {this.state.pf_url}
       </div>
     );
   }

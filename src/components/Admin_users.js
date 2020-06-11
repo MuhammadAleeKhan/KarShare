@@ -31,14 +31,13 @@ class Admin_users extends React.Component{
     
       }
        handlechange(event) {
-        const { name, value, checked, type } = event.target;
-        event.target.type == "checkbox"
+                event.target.type == "checkbox"
           ? this.setState({ [event.target.name]: event.target.checked })
           : this.setState({
               [event.target.name]: event.target.value,
             });
             console.log('hello')
-            var fname=this.state.name+'%'
+            var fname=event.target.value+'%'
              fetch("http://localhost:4000/adminbringusersspecific", {
                 method: "post",
                 headers: { "Content-Type": "application/json",'authorization':localStorage.getItem('tok') },
@@ -245,4 +244,3 @@ this.setState({id:id,name:name,email:email,contactno:contact,Gender:gender})
     }
 }
 export default Admin_users
-{}

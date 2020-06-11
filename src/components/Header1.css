@@ -1,0 +1,60 @@
+.buttonA {
+  display: flex;
+  align-items: center;
+  background-color: rgb(255, 238, 0);
+  padding: 10px;
+  margin-left: 520px;
+  font-size: 15px;
+  /*styling of button*/
+  border-radius: 5px;
+  border-width: 0px;
+  font-family: "Segoe UI";
+  font-weight: bold;
+  box-shadow: 0 7px 5px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.19);
+  transition: all 0.2s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.buttonA a {
+  text-decoration: none;
+  color: white;
+}
+
+.buttonA:hover {
+  background-color: rgba(0, 0, 0, 0.527);
+  color: white;
+}
+@media screen and (min-width: 400px) {
+    .buttonA:hover span {
+      padding-right: 16px;
+      top: -1px;
+    }
+  }
+  
+  .buttonA span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .buttonA span:after {
+    position: absolute;
+    opacity: 0;
+    transition: 0.5s;
+  }
+  /* Desktop Version */
+  
+  @media screen and (min-width: 400px) {
+    .buttonA span:after {
+      content: "\00bb";
+    }
+  }
+  
+  .buttonA:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  

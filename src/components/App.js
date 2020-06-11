@@ -19,8 +19,6 @@ import Admin_users from './Admin_users'
 import Admin_rides from './Admin_rides'
 import Admin_Bookings from './Admin_Bookings'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
- 
 function App() {
   return (
     <Router>
@@ -40,7 +38,6 @@ function App() {
           <Route path="/adminusers" exact component={Admin_users} />
           <Route path="/adminrides" exact component={Admin_rides} />
           <Route path="/adminbookings" exact component={Admin_Bookings} />
-          
         </Switch>
       </div>
     </Router>

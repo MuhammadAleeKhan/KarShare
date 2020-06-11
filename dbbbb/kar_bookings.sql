@@ -29,13 +29,12 @@ CREATE TABLE `bookings` (
   `Starting_address` varchar(100) DEFAULT NULL,
   `End_address` varchar(100) DEFAULT NULL,
   `statuss` varchar(30) DEFAULT NULL,
-  `rider_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`bookid`),
   KEY `rideid` (`rideid`),
   KEY `book_user_id` (`book_user_id`),
   CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`rideid`) REFERENCES `rides` (`rideid`),
   CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`book_user_id`) REFERENCES `users` (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +43,7 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
-INSERT INTO `bookings` VALUES (1,15,1,'New Rizvia Society, Karachi, Pakistan','New Rizvia Society, Karachi, Pakistan',NULL,'Syed Saadat Raza rizvi');
+INSERT INTO `bookings` VALUES (4,1,44,'IBA City Campus, Kiyani Shaheed Road, Karachi, Pakistan','Rufi Spring Field, Abul Hasan Isphahani Road, Karachi, Pakistan','Pending'),(5,33,1,'Rufi Spring Field, Abul Hasan Isphahani Road, Karachi, Pakistan','IBA City Campus, Kiyani Shaheed Road, Karachi, Pakistan','Pending'),(6,11,44,'IBA City Campus, Kiyani Shaheed Road, Karachi, Pakistan','IBA','Pending');
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-07 22:23:11
+-- Dump completed on 2020-06-12  4:01:41

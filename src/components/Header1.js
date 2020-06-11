@@ -1,9 +1,8 @@
 import React from "react";
-import HamburgerMenu from "./HamburgerMenu";
-// import Homebutton from "./Homebutton";
 import { Link } from "react-router-dom";
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Logout from "./Logout";
+import "./Header1.css";
 function Header1() {
   return (
     <header>
@@ -12,8 +11,7 @@ function Header1() {
            KarShare 
         </Link>
       </h1>
-      <Logout />
-      <button type="button" class="buttonL">
+      <button type="button" class="buttonA">
         <Link to="/addride">
           <span> Add ride </span>
         </Link>
@@ -33,7 +31,7 @@ function Header1() {
           <span> View Your rides </span>
         </Link>
       </button1>
-      
+      <Logout />
     </header>
   );
 }

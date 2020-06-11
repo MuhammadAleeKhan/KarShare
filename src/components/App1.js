@@ -2,6 +2,7 @@ import React from "react";
 import { GoogleComponent } from "react-google-location";
 import MyFancyComponent from "./direction.js";
 import "./map.css";
+import Header1 from "./Header1";
 class App1 extends React.Component {
   constructor() {
     super();
@@ -22,18 +23,24 @@ class App1 extends React.Component {
     this.reversegeocoding = this.reversegeocoding.bind(this);
     this.handleError = this.handleError.bind(this);
     this.placeride = this.placeride.bind(this);
-  }   
+  }
   async componentDidMount() {
-    await fetch('http://localhost:4000/verifytok', {
-      method: 'post',
-      headers: {'Content-Type':'application/json','authorization':localStorage.getItem('tok')},
-  }).then(async res=>res.text()).then(res => this.setState({status:res}));
-  if(this.state.status=='Forbidden'){
-    this.props.history.push('/login')
-  } else{
-    this.geolocation();
-  }}
-  
+    await fetch("http://localhost:4000/verifytok", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("tok"),
+      },
+    })
+      .then(async (res) => res.text())
+      .then((res) => this.setState({ status: res }));
+    if (this.state.status == "Forbidden") {
+      this.props.history.push("/login");
+    } else {
+      this.geolocation();
+    }
+  }
+
   getlocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -99,7 +106,10 @@ class App1 extends React.Component {
   placeride() {
     fetch("http://localhost:4000/addride", {
       method: "post",
-      headers: { "Content-Type": "application/json",'authorization':localStorage.getItem('tok') },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("tok"),
+      },
       body: JSON.stringify({
         userid: this.state.userid,
         userregistcarid: this.state.userregistcarid,
@@ -121,7 +131,7 @@ class App1 extends React.Component {
         {/* {this.state.lati} */}
         {/* {this.state.lngi} */}
         {/* <p class = "loc">Current Location: {this.state.Place} </p> */}
-        <header>
+        {/* <header>
           <h1>
             <a
               href="index.html"
@@ -130,7 +140,8 @@ class App1 extends React.Component {
               KarShare
             </a>
           </h1>
-        </header>
+        </header> */}
+        <Header1 />
         <MyFancyComponent lat1={this.state.lati} lng1={this.state.lngi} />
 
         <GoogleComponent
@@ -162,7 +173,7 @@ class App1 extends React.Component {
             <option value="hatchback">Hatchback</option>
             <option value="sedan">Sedan</option>
           </select> */}
-{/* 
+          {/* 
           <br></br>
           <br></br>
           <label
@@ -174,7 +185,7 @@ class App1 extends React.Component {
           <select id="payment" name="payment">
             <option value="cash">Cash</option>
             <option value="addcard">+ add a credit card</option> */}
-            {/* <option value=""></option>
+          {/* <option value=""></option>
             <option value=""></option> */}
           {/* </select> */}
         </form>
