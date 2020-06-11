@@ -16,8 +16,18 @@ function HeaderAdmin() {
         </Link>
     </button>
     <button1 type="button1" class="button1">
-      <Link to='/Master'>
-        <span> Master Panel </span>
+      <Link to='/adminusers'>
+        <span> Users </span>
+      </Link>
+    </button1>
+    <button1 type="button1" class="button1">
+      <Link to='/adminbookings'>
+        <span> Bookings </span>
+      </Link>
+    </button1>
+    <button1 type="button1" class="button1">
+      <Link to='/adminrides'>
+        <span> Rides </span>
       </Link>
     </button1>
     <Logout/>
