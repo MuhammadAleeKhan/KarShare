@@ -1,0 +1,26 @@
+.booking {
+  /* color: white; */
+  margin-left: 50px;
+  margin-top: 30px;
+  font-family: monospace;
+  box-sizing: border-box;
+  border-color: black;
+  border-style: solid;
+  width: 480px;
+  height: 140px;
+  padding-left: 10px;
+  padding-top: 5px;
+  box-shadow: grey 3px 3px 5px 0px;
+}
+
+.BG {
+  background-image: url("Carvector.png");
+  min-width: 100%;
+  opacity: 1;
+  min-height: 100%;
+  background-position: bottom;
+  background-size: cover;
+  position: fixed;
+  background-position-y: -250px;
+  background-position-x: 270px;
+}

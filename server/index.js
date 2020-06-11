@@ -36,20 +36,20 @@ var upload = multer({
 
 var mysqlconnec=mysql.createConnection({
     host:'127.0.0.1',
-    user:'saadat',
-    password:'octaslash',
-    database:'kar',
+    user:'root',
+    password:'password',
+    database:'webapp',
     multipleStatements:true
 })
 mysqlconnec.connect((err)=>{
 if(!err){
     console.log("connected successfully");
 } else{
-    console.log("errorr"+JSON.stringify(err,undefined,2));
+    console.log("error"+JSON.stringify(err,undefined,2));
 }
 
 })
-app.listen(4000,()=>{console.log("express server is running !!!11")});
+app.listen(4000,()=>{console.log("express server is running!")});
 
 app.put('/edit',verifyToken,(req,res) => {
     jwt.verify(req.token,'secretkey',(err,authData)=>{

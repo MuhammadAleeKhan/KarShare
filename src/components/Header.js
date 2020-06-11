@@ -1,7 +1,6 @@
 import React from "react";
 import LoginBtn from "./LoginBtn";
 import SignUpBtn from "./SignUpBtn";
-import HamburgerMenu from "./HamburgerMenu";
 // import Homebutton from "./Homebutton";
 import { Link } from "react-router-dom";
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -15,7 +14,6 @@ function Header() {
       </h1>
       <LoginBtn />
       <SignUpBtn />
-      <HamburgerMenu />
     </header>
   );
 }
