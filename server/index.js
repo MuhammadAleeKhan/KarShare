@@ -36,9 +36,9 @@ var upload = multer({
 
 var mysqlconnec=mysql.createConnection({
     host:'127.0.0.1',
-    user:'root',
-    password:'password',
-    database:'webapp',
+    user:'saadat',
+    password:'octaslash',
+    database:'kar',
     multipleStatements:true
 })
 mysqlconnec.connect((err)=>{
@@ -275,7 +275,7 @@ app.post("/verifytok",verifyToken,(req,res)=>{
                                     })}})})   
                                     app.get("/bringbookings",verifyToken,(req,res)=>{
                                         let emp=req.body;
-                                        var sql="SELECT * FROM BOOKINGS where book_user_id=?;"; 
+                                        var sql="SELECT * FROM BOOKINGS,users,rides where bookings.book_user_id=? AND rides.userid=users.userid and Bookings.rideid=rides.rideid;;"; 
                                         jwt.verify(req.token,'secretkey',(err,authData)=>{
                                             if(err){
                                                 console.log('error')
@@ -425,6 +425,8 @@ app.get("/adminbringrides",verifyToken,(req,res)=>{
                                 } else{
                                     mysqlconnec.query(sql,[emp.name],(err,row,fields)=>{
                                         if(!err){
+                                            console.log(emp.name)
+                                            console.log('hello')
                                             res.send(row);
                                         } else{
                                             console.log(err);
@@ -452,7 +454,7 @@ app.delete("/admindeleterides",verifyToken,(req,res)=>{
                                 
  app.get("/adminbringbookings",verifyToken,(req,res)=>{
                 let emp=req.body;
-                var sql="SELECT * FROM Bookings"; 
+                var sql="SELECT * FROM bookings,users where bookings.book_user_id=users.userid;"
                 jwt.verify(req.token,'adminkey',(err,authData)=>{
                     if(err){
                         res.sendStatus(403);
@@ -469,7 +471,7 @@ app.post("/adminbringbookingsspecific",verifyToken,(req,res)=>{
                             console.log('sccess')
                             let emp=req.body;
                         
-                            var sql="SELECT * FROM Bookings where rider_name LIKE ?;"; 
+                            var sql="SELECT * FROM Bookings,users where Bookings.book_user_id=users.userid AND users.fullname LIKE ?;"; 
                             jwt.verify(req.token,'adminkey',(err,authData)=>{
                                 if(err){
                                     console.log('error')

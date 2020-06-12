@@ -31,7 +31,7 @@ class Admin_rides extends React.Component{
               [event.target.name]: event.target.value,
             });
             console.log('hello')
-            var fname=this.state.name+'%'
+            var fname=event.target.value+'%'
              fetch("http://localhost:4000/adminbringridesspecific", {
                 method: "post",
                 headers: { "Content-Type": "application/json",'authorization':localStorage.getItem('tok') },

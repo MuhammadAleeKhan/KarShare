@@ -31,10 +31,11 @@ CREATE TABLE `users` (
   `password` varchar(20) DEFAULT NULL,
   `usertypeid` int DEFAULT NULL,
   `dateofbirth` date DEFAULT NULL,
+  `prof_pic` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`userid`,`email`),
   KEY `usertypeid` (`usertypeid`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`usertypeid`) REFERENCES `usertypes` (`usertypeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +44,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'saadat','M','03332358685','saddat1998@hotmai.com','digimon',1,NULL),(44,'saadat','M','03332358885','saddat1997@hotmail.com','octaslash',1,NULL),(63,'saadat','M','03332358885','sadda123@hotmail.com','digimon',1,'2020-03-10'),(64,'arbaz','M','09007860111','asdas@gmail.com','digimon',1,'1998-02-02'),(65,'saadat','M','03332358885','saddat1997@hotmail.com','12345',1,'2020-03-12'),(66,'sadasd@hotmail.com','M','03232311111','sadsad@gotmail.com','123456',1,'2020-04-08'),(67,'sadasda','M','0333234885','sadsad@hotmail.com','12345',1,'2020-04-08'),(68,'sdasdasd','M','033323','saddat17@hotmail.com','12345',1,'2020-04-07'),(69,'asd','M','032323','adsdas@hotmail.com','12345',1,'2020-04-08'),(70,'asd','M','032323','adsdas@hotmail.com','12345',1,'2020-04-08'),(71,'dasdasd','M','03332358885','sadasda@fasfa.com','12345',1,'2020-04-07'),(72,'sdaasd','M','123123','saddat1997@hotmai.com','12345',1,'2020-04-08'),(73,'sadsad','M','22222','asdsad@hotmai.com','123',1,'2020-04-09'),(74,'sdasd','M','123123','asdasd@goasd.com','3333',1,'2020-04-26'),(76,'OOP God','M','03332358885','saddat5959@gmail.com','digimon',2,'2020-04-02');
+INSERT INTO `users` VALUES (1,'Syed Saadat Raza ','M','03332358685','saddat1998@hotmail.com','digimon',1,NULL,'.\\uploads\\2020-06-11T20_54_57.896ZTrip settlement.png'),(44,'saadat','M','03332358885','saddat1997@hotmail.com','octaslash',1,NULL,'.\\uploads\\2020-06-11T22_51_31.519ZBlacklist vendor_client.png'),(63,'saadat','M','03332358885','sadda123@hotmail.com','digimon',1,'2020-03-10',NULL),(64,'arbaz','M','09007860111','asdas@gmail.com','digimon',1,'1998-02-02',NULL),(66,'sadasd@hotmail.com','M','03232311111','sadsad@gotmail.com','123456',1,'2020-04-08',NULL),(67,'sadasda','M','0333234885','sadsad@hotmail.com','12345',1,'2020-04-08',NULL),(68,'sdasdasd','M','033323','saddat17@hotmail.com','12345',1,'2020-04-07',NULL),(69,'asd','M','032323','adsdas@hotmail.com','12345',1,'2020-04-08',NULL),(71,'dasdasd','M','03332358885','sadasda@fasfa.com','12345',1,'2020-04-07',NULL),(72,'sdaasd','M','123123','saddat1997@hotmai.com','12345',1,'2020-04-08',NULL),(76,'OOP God','M','03332358885','saddat5959@gmail.com','digimon',2,'2020-04-02',NULL),(77,'Ali zaidi','M','090078601','alizaid@gmail.com','digimon',1,'2020-06-09',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-11 19:31:40
+-- Dump completed on 2020-06-12  4:01:40

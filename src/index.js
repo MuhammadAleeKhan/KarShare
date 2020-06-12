@@ -6,6 +6,8 @@ import App from "./components/App";
 // import App1 from "./components/App1";
 import * as serviceWorker from "./serviceWorker";
 
+import Appdir from "./Directions2";
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

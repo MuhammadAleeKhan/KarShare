@@ -7,10 +7,17 @@ class Admin_users extends React.Component{
         super()
     this.state={
         users:[],
-        name:''
+        name:'',
+        email:'',
+        Gender:'',
+        contactno:'',
+        id:''
     }       
     this.handlechange=this.handlechange.bind(this)
+    this.handlechange1=this.handlechange1.bind(this)
     this.Deletehandler=this.Deletehandler.bind(this)
+    this.UpdateHandler=this.UpdateHandler.bind(this)
+    this.setstatehandler=this.setstatehandler.bind(this)
     }
 
     async componentDidMount() {
@@ -24,14 +31,13 @@ class Admin_users extends React.Component{
     
       }
        handlechange(event) {
-        const { name, value, checked, type } = event.target;
-        event.target.type == "checkbox"
+                event.target.type == "checkbox"
           ? this.setState({ [event.target.name]: event.target.checked })
           : this.setState({
               [event.target.name]: event.target.value,
             });
             console.log('hello')
-            var fname=this.state.name+'%'
+            var fname=event.target.value+'%'
              fetch("http://localhost:4000/adminbringusersspecific", {
                 method: "post",
                 headers: { "Content-Type": "application/json",'authorization':localStorage.getItem('tok') },
@@ -42,6 +48,15 @@ class Admin_users extends React.Component{
                  }).
                 then(async res => await res.json()).
                 then(res => {this.setState({users:res})})
+      }
+      handlechange1(event) {
+        const { name, value, checked, type } = event.target;
+        event.target.type == "checkbox"
+          ? this.setState({ [event.target.name]: event.target.checked })
+          : this.setState({
+              [event.target.name]: event.target.value,
+            });
+        
       }
       Deletehandler(id){
         fetch("http://localhost:4000/admindeleteuser", {
@@ -54,6 +69,26 @@ class Admin_users extends React.Component{
              }).
             then(async res => await res.json()).
             then(res => {this.setState({users:res})})
+      }
+      async UpdateHandler(){
+        await fetch("http://localhost:4000/adminuseredit", {
+          method: "put",
+          headers: { "Content-Type": "application/json",'authorization':localStorage.getItem('tok') },
+          body: JSON.stringify({
+              id:this.state.id,
+              name:this.state.name,
+              email:this.state.email,
+              Gender:this.state.Gender,
+              contactno:this.state.contactno
+   
+             })
+           }).
+          then(async res => await res.json()).
+          then(res => {this.setState({users:res})})
+}
+      
+      setstatehandler(id,name,email,contact,gender){
+this.setState({id:id,name:name,email:email,contactno:contact,Gender:gender})
       }
     
     render(){
@@ -137,7 +172,7 @@ class Admin_users extends React.Component{
             <td>{arr.Gender}</td>
             <td>{arr.dateofbirth}</td>
             <td>
-              <a href="#" className="edit" title="Edit" data-toggle="tooltip">
+              <a href="#" className="edit" title="Edit" data-toggle="modal" data-target="#addEmployeeModal" onClick={()=>this.setstatehandler(arr.userid,arr.fullname,arr.email,arr.contactno,arr.Gender)}>
                 <i className="material-icons" ></i>
               </a>
               <a
@@ -156,9 +191,56 @@ class Admin_users extends React.Component{
     
     </div>
   </div>
+  <div id="addEmployeeModal" className="modal fade">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <form>
+        <div className="modal-header">
+          <h4 className="modal-title">Update User</h4>
+          <button
+            type="button"
+            className="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >
+            ×
+          </button>
+        </div>
+        <div className="modal-body">
+          <div className="form-group">
+            <label>Name</label>
+            <input type="text" name="name" className="form-control" value={this.state.name} required onChange={this.handlechange1} />
+          </div>
+          <div className="form-group">
+            <label>Email</label>
+            <input type="email" name="email" className="form-control" value={this.state.email} required onChange={this.handlechange1} />
+          </div>
+          <div className="form-group">
+            <label>Contactno</label>
+            <textarea className="form-control" name="contactno" required  value={this.state.contactno} onChange={this.handlechange1}/>
+          </div>
+          <div className="form-group">
+            <label>Gender(M or F)</label>
+            <input type="text" name="Gender" className="form-control" value={this.state.Gender} required onChange={this.handlechange1} />
+          </div>
+        </div>
+    
+        <div className="modal-footer">
+          <input
+            type="button"
+            className="btn btn-default"
+            data-dismiss="modal"
+            defaultValue="Cancel"
+
+          />
+          <input type="submit" className="btn btn-success" defaultValue="Add" onClick={this.UpdateHandler}/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>;
             </div>
         )
     }
 }
 export default Admin_users
-{}
