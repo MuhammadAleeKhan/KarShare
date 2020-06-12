@@ -242,7 +242,21 @@ app.post("/verifytok",verifyToken,(req,res)=>{
                             }
                         })}})})
                        
-              
+              app.post("/addride",verifyToken,(req,res)=>{
+                let emp=req.body;
+                var sql="INSERT INTO rides(userid,userregistcarid,startlat,startlng,endlat,endlng,Starting_address,End_adrress) VALUES(?,?,?,?,?,?,?,?);"; 
+                jwt.verify(req.token,'secretkey',(err,authData)=>{
+                    if(err){
+                        res.sendStatus(403);
+
+                    } else{
+                        mysqlconnec.query(sql,[authData.user.id,emp.userregistcarid,emp.startlat,emp.startlng,emp.endlat,emp.endlng,emp.Starting_address,emp.End_adrress],(err,row,fields)=>{
+                            if(!err){
+                                res.json({row:row,authData:authData});
+                            } else{
+                                console.log(err);
+                            }
+                        })}})})
                         app.post("/bringrides",verifyToken,(req,res)=>{
                             let emp=req.body;
                             var sql="SELECT * FROM rides,users WHERE rides.End_adrress=? and rides.userid=users.userid and rides.userid!=?;"
@@ -261,7 +275,7 @@ app.post("/verifytok",verifyToken,(req,res)=>{
                                     })}})})   
                                     app.get("/bringbookings",verifyToken,(req,res)=>{
                                         let emp=req.body;
-                                        var sql="SELECT * FROM BOOKINGS where book_user_id=?;"; 
+                                        var sql="SELECT * FROM BOOKINGS,users,rides where bookings.book_user_id=? AND rides.userid=users.userid and Bookings.rideid=rides.rideid;;"; 
                                         jwt.verify(req.token,'secretkey',(err,authData)=>{
                                             if(err){
                                                 console.log('error')
@@ -411,6 +425,8 @@ app.get("/adminbringrides",verifyToken,(req,res)=>{
                                 } else{
                                     mysqlconnec.query(sql,[emp.name],(err,row,fields)=>{
                                         if(!err){
+                                            console.log(emp.name)
+                                            console.log('hello')
                                             res.send(row);
                                         } else{
                                             console.log(err);
@@ -438,7 +454,7 @@ app.delete("/admindeleterides",verifyToken,(req,res)=>{
                                 
  app.get("/adminbringbookings",verifyToken,(req,res)=>{
                 let emp=req.body;
-                var sql="SELECT * FROM Bookings,users where Bookings.book_user_id=users.userid;"; 
+                var sql="SELECT * FROM bookings,users where bookings.book_user_id=users.userid;"
                 jwt.verify(req.token,'adminkey',(err,authData)=>{
                     if(err){
                         res.sendStatus(403);
@@ -455,7 +471,7 @@ app.post("/adminbringbookingsspecific",verifyToken,(req,res)=>{
                             console.log('sccess')
                             let emp=req.body;
                         
-                            var sql="SELECT * FROM Bookings,users where  Bookings.book_user_id=users.userid AND users.fullname LIKE ?;"
+                            var sql="SELECT * FROM Bookings,users where Bookings.book_user_id=users.userid AND users.fullname LIKE ?;"; 
                             jwt.verify(req.token,'adminkey',(err,authData)=>{
                                 if(err){
                                     console.log('error')
@@ -470,32 +486,6 @@ app.post("/adminbringbookingsspecific",verifyToken,(req,res)=>{
                                             console.log(err);
                                         }
                                     })}})})        
-                                    app.put('/adminuseredit',verifyToken,(req,res) => {
-                                        jwt.verify(req.token,'adminkey',(err,authData)=>{
-                                            if(err){
-                                                console.log(err)
-                                            }else{
-                                    
-                                                let emp = req.body
-                                                console.log(emp.fullname)
-                                                console.log(emp.email)
-                                                console.log(emp.password)
-                                                mysqlconnec.query(`UPDATE users 
-                                                SET 
-                                                    fullname = case when ? <> '' then ? else password end,
-                                                    email = case when ? <> '' then ? else email end, 
-                                                    contactno = case when ? <> '' then ? else contactno end,
-                                                    Gender = case when ? <> '' then ? else Gender end
-                                                WHERE userid = ?;`,[emp.name,emp.name,emp.email,emp.email,emp.contactno,emp.contactno,emp.Gender,emp.Gender,emp.id],(err,row,fields)=>{
-                                                    if(!err){
-                                                        console.log("updated successfully")
-                                            }else{
-                                                console.log(err)
-                                            }
-                                        })
-                                    }
-                                    })
-                                    })
                function verifyToken(req,res,next){
                  const header=req.headers['authorization'];
                  if(typeof header!=='undefined'){
