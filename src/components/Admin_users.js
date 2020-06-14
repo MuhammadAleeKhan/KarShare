@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderAdmin from './HeaderAdmin'
-
+import {withRouter} from 'react-router-dom'
 class Admin_users extends React.Component{
     constructor(){
         
@@ -21,6 +21,7 @@ class Admin_users extends React.Component{
     }
 
     async componentDidMount() {
+      if(localStorage.getItem('type')=='Admin'){
         await fetch("http://localhost:4000/adminbringusers", {
           method: "get",
           headers: { "Content-Type": "application/json",'authorization':localStorage.getItem('tok') }
@@ -29,7 +30,9 @@ class Admin_users extends React.Component{
           then(async res => await res.json()).
           then(res => {this.setState({users:res})})
     
-      }
+      } else{
+        this.props.history.push('/login')
+      }}
        handlechange(event) {
                 event.target.type == "checkbox"
           ? this.setState({ [event.target.name]: event.target.checked })
@@ -243,4 +246,4 @@ this.setState({id:id,name:name,email:email,contactno:contact,Gender:gender})
         )
     }
 }
-export default Admin_users
+export default withRouter(Admin_users)

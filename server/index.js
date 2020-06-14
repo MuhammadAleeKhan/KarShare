@@ -268,6 +268,7 @@ app.post("/verifytok",verifyToken,(req,res)=>{
                                     mysqlconnec.query(sql,[emp.End_adrress,authData.user.id],(err,row,fields)=>{
                                         if(!err){
                                             console.log(authData.user.id)
+                                            console.log(emp.End_adrress)
                                             res.send(row);
                                         } else{
                                             console.log(err);
@@ -295,14 +296,14 @@ app.post("/verifytok",verifyToken,(req,res)=>{
 
                                     app.post("/bookride",verifyToken,(req,res)=>{
                                         let emp=req.body;
-                                        var sql="INSERT INTO Bookings(rideid,book_user_id,Starting_address,End_address,statuss,rider_name) VALUES(?,?,?,?,?,?);"; 
+                                        var sql="INSERT INTO Bookings(rideid,book_user_id,Starting_address,End_address,statuss) VALUES(?,?,?,?,?);"; 
                                         jwt.verify(req.token,'secretkey',(err,authData)=>{
                                             if(err){
                                                 console.log('error')
                                                 res.sendStatus(403);
                         
                                             } else{
-                                                mysqlconnec.query(sql,[emp.rideid,authData.user.id,emp.Starting_address,emp.End_adrress,'Pending',authData.user.name],(err,row,fields)=>{
+                                                mysqlconnec.query(sql,[emp.rideid,authData.user.id,emp.Starting_address,emp.End_adrress,'Pending'],(err,row,fields)=>{
                                                     if(!err){
                                                         console.log('success')
                                                         res.json({row:row,authData:authData});
@@ -485,7 +486,33 @@ app.post("/adminbringbookingsspecific",verifyToken,(req,res)=>{
                                         } else{
                                             console.log(err);
                                         }
-                                    })}})})        
+                                    })}})})    
+                                    app.put('/adminuseredit',verifyToken,(req,res) => {
+                                        jwt.verify(req.token,'adminkey',(err,authData)=>{
+                                            if(err){
+                                                console.log(err)
+                                            }else{
+                                    
+                                                let emp = req.body
+                                                console.log(emp.fullname)
+                                                console.log(emp.email)
+                                                console.log(emp.password)
+                                                mysqlconnec.query(`UPDATE users 
+                                                SET 
+                                                    fullname = case when ? <> '' then ? else password end,
+                                                    email = case when ? <> '' then ? else email end, 
+                                                    contactno = case when ? <> '' then ? else contactno end,
+                                                    Gender = case when ? <> '' then ? else Gender end
+                                                WHERE userid = ?;`,[emp.name,emp.name,emp.email,emp.email,emp.contactno,emp.contactno,emp.Gender,emp.Gender,emp.id],(err,row,fields)=>{
+                                                    if(!err){
+                                                        console.log("updated successfully")
+                                            }else{
+                                                console.log(err)
+                                            }
+                                        })
+                                    }
+                                    })
+                                    })    
                function verifyToken(req,res,next){
                  const header=req.headers['authorization'];
                  if(typeof header!=='undefined'){
