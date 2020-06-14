@@ -27,16 +27,22 @@ class Bookings_on_ride extends React.Component {
   render() {
     return (
       <div>
-        <Header1></Header1>
+        <Header1 />
         {this.state.bookings.map((arr) => (
-          <li key={arr.userid}>
-            Name:{arr.fullname}
+          <div key={arr.userid} className="MyRides">
+            
+              <h5>
+                {" "}
+                <h5 style={{ fontWeight: "bold" }}>Name: </h5>
+                {arr.fullname}
+                {/* <br></br> */}
+                <br></br>
+                <h5 style={{ fontWeight: "bold" }}>Contact: </h5>
+                {arr.contactno}
+              </h5>
+        
             <br></br>
-            Contact no:{arr.contactno}
-            <div></div>
-            <br></br>
-            <br></br>
-          </li>
+          </div>
         ))}
       </div>
     );

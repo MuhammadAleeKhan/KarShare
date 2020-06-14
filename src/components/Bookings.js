@@ -26,23 +26,28 @@ class Bookings extends React.Component {
     return (
       <div className="BG">
         <Header1 />
-        <div className="booking">
+
           {this.state.bookings.map((arr) => (
             <div key={arr.rideid}>
+                      <div className="booking">
               <h5 style={{ fontWeight: "bold" }}>Ride-ID: {arr.rideid}</h5>
 
               Starting address: {arr.Starting_address}
               <br></br>
               Drop off: {arr.End_address}
               <br></br>
-              Rider name: {arr.rider_name}
+              Rider name: {arr.fullname}
               <br></br>
+              Contact: {arr.contactno}
+              <br></br>
+              Status: {arr.statuss}
               <div></div>
               <br></br>
               <br></br>
             </div>
+            </div>
           ))}
-        </div>
+        
       </div>
     );
   }
