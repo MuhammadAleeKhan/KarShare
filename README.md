@@ -1,3 +1,5 @@
+﻿This Project is created by Muhammad Ali Khan and Syed Saadat Raza.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
