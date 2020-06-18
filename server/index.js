@@ -36,9 +36,9 @@ var upload = multer({
 
 var mysqlconnec=mysql.createConnection({
     host:'127.0.0.1',
-    user:'saadat',
-    password:'octaslash',
-    database:'kar',
+    user:'root',
+    password:'password',
+    database:'webapp',
     multipleStatements:true
 })
 mysqlconnec.connect((err)=>{
